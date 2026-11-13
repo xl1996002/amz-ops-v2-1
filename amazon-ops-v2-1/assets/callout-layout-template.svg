@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 600" width="970" height="600">
+  <!--
+    图示详情 · 标注位布局模板（970×600）
+    用法：
+      1. 把 "产品区" 的占位框与线稿替换为客户产品图（或直接在此图上叠标注）
+      2. 把 6 条 {{...}} 占位文字改成实际卖点（每行 ≤16 字符，最多 2 行）
+      3. 引线端点用小圆点标出，落在真实部件上
+      4. 导出 PNG 前删掉所有 zone / hint 图层
+    参数：主标 28px / 副文 19px / 引线 1.5px / 端点 3px / 边距 40px
+  -->
+  <rect width="970" height="600" fill="#ffffff"/>
+
+  <!-- ============ 布局参考层（导出前删除） ============ -->
+  <g id="layout-guides">
+    <rect x="0" y="0" width="300" height="600" fill="#fdf0f4" opacity="0.55"/>
+    <rect x="670" y="0" width="300" height="600" fill="#fdf0f4" opacity="0.55"/>
+    <rect x="300" y="0" width="370" height="600" fill="none" stroke="#d98aa5" stroke-width="1" stroke-dasharray="6 6"/>
+    <text x="150" y="26" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="13" fill="#c2557f">左侧标注区 · 300px</text>
+    <text x="485" y="26" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="13" fill="#c2557f">产品区 · 370px（占宽 40%）</text>
+    <text x="820" y="26" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="13" fill="#c2557f">右侧标注区 · 300px</text>
+    <text x="485" y="594" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="12" fill="#8b95a5">安全边 ≥40px ｜ 主标 28px / 副文 19px / 引线 1.5px + 端点 3px</text>
+  </g>
+
+  <!-- ============ 产品占位（替换为产品图） ============ -->
+  <g id="product-placeholder">
+    <rect x="320" y="80" width="330" height="440" fill="#f5f3f4" stroke="#d8d3d5"
+          stroke-width="1.5" stroke-dasharray="10 6" rx="8"/>
+    <text x="485" y="290" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="16" fill="#a8a2a4">产品图放这里</text>
+    <text x="485" y="316" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="13" fill="#bdb8ba">产品占宽 40%，不要拍满</text>
+    <text x="485" y="342" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="13" fill="#bdb8ba">四个着地点 / 关键部件要露出来</text>
+  </g>
+
+  <!-- ============ 左侧三条标注 ============ -->
+  <g id="callout-left">
+    <!-- 1 -->
+    <text x="60" y="118" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="28"
+          font-weight="700" fill="#1f2733">{{标注 1 主标}}</text>
+    <text x="60" y="146" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19"
+          fill="#5b6675">{{副文，≤16 字符}}</text>
+    <polyline points="188,124 240,124 320,150" fill="none" stroke="#3A3A3A" stroke-width="1.5"/>
+    <circle cx="320" cy="150" r="3.4" fill="#c2557f"/>
+
+    <!-- 2 -->
+    <text x="60" y="298" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="28"
+          font-weight="700" fill="#1f2733">{{标注 2 主标}}</text>
+    <text x="60" y="326" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19"
+          fill="#5b6675">{{副文，≤16 字符}}</text>
+    <polyline points="188,304 250,304 320,318" fill="none" stroke="#3A3A3A" stroke-width="1.5"/>
+    <circle cx="320" cy="318" r="3.4" fill="#c2557f"/>
+
+    <!-- 3 -->
+    <text x="60" y="478" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="28"
+          font-weight="700" fill="#1f2733">{{标注 3 主标}}</text>
+    <text x="60" y="506" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="19"
+          fill="#5b6675">{{副文，≤16 字符}}</text>
+    <polyline points="188,484 250,484 320,480" fill="none" stroke="#3A3A3A" stroke-width="1.5"/>
+    <circle cx="320" cy="480" r="3.4" fill="#c2557f"/>
+  </g>
+
+  <!-- ============ 右侧三条标注 ============ -->
+  <g id="callout-right">
+    <!-- 4 -->
+    <text x="910" y="118" text-anchor="end" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="28" font-weight="700" fill="#1f2733">{{标注 4 主标}}</text>
+    <text x="910" y="146" text-anchor="end" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="19" fill="#5b6675">{{副文，≤16 字符}}</text>
+    <polyline points="782,124 730,124 650,150" fill="none" stroke="#3A3A3A" stroke-width="1.5"/>
+    <circle cx="650" cy="150" r="3.4" fill="#c2557f"/>
+
+    <!-- 5 -->
+    <text x="910" y="298" text-anchor="end" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="28" font-weight="700" fill="#1f2733">{{标注 5 主标}}</text>
+    <text x="910" y="326" text-anchor="end" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="19" fill="#5b6675">{{副文，≤16 字符}}</text>
+    <polyline points="782,304 720,304 650,318" fill="none" stroke="#3A3A3A" stroke-width="1.5"/>
+    <circle cx="650" cy="318" r="3.4" fill="#c2557f"/>
+
+    <!-- 6（示例：无引线，用色块 / 图标） -->
+    <text x="910" y="478" text-anchor="end" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="28" font-weight="700" fill="#1f2733">{{标注 6 主标}}</text>
+    <text x="910" y="506" text-anchor="end" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="19" fill="#5b6675">{{副文，≤16 字符}}</text>
+    <g transform="translate(800,540)">
+      <circle cx="0" cy="0" r="9" fill="#f4a7c0" stroke="#d98aa5" stroke-width="1.5"/>
+      <circle cx="28" cy="0" r="9" fill="#9ccfa8" stroke="#7fb98e" stroke-width="1.5"/>
+      <circle cx="56" cy="0" r="9" fill="#a8c6ef" stroke="#8ab0e4" stroke-width="1.5"/>
+      <circle cx="84" cy="0" r="9" fill="#c3aee0" stroke="#a996cf" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- ============ 用法提示（导出前删除） ============ -->
+  <g id="usage-hint">
+    <rect x="330" y="548" width="310" height="34" rx="6" fill="#fff8e1" stroke="#f0e3bc"/>
+    <text x="485" y="570" text-anchor="middle" font-family="PingFang SC,Microsoft YaHei,sans-serif"
+          font-size="13" fill="#8a6d1a">改完文字后删除 guides / placeholder / hint 三层</text>
+  </g>
+</svg>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>广告结构示意图 · 模板</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#ffffff; --line:#e4e7ec; --ink:#1f2733;
+    --ink-2:#5b6675; --ink-3:#8b95a5; --accent:#2f6fd0; --accent-soft:#eaf1fb;
+    --warn:#b4601a; --warn-soft:#fdf3e7; --ok:#1f7a4d; --ok-soft:#eaf6ef;
+    --sp:#2f6fd0; --sd:#7a4fd0; --sb:#b4601a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:14px/1.6 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+  .tpl-note{background:var(--warn-soft);border:1px solid #f0d9bd;color:var(--warn);
+    border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:20px}
+  h1{font-size:22px;margin:0 0 6px;letter-spacing:.2px}
+  .sub{color:var(--ink-2);font-size:13px;margin-bottom:24px}
+  .kpi{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+  .kpi div{flex:1 1 150px;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:12px 14px}
+  .kpi b{display:block;font-size:19px;margin-top:2px}
+  .kpi span{color:var(--ink-3);font-size:12px}
+  .portfolio{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:18px 18px 6px;margin-bottom:18px}
+  .pf-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    padding-bottom:12px;border-bottom:1px dashed var(--line);margin-bottom:14px}
+  .pf-name{font-family:ui-monospace,Consolas,monospace;font-size:15px;font-weight:600}
+  .pf-meta{color:var(--ink-3);font-size:12px}
+  .chip{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;
+    background:var(--accent-soft);color:var(--accent);border:1px solid #d5e3f8}
+  .camp{border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden}
+  .camp-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    background:#fbfcfe;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .camp-name{font-family:ui-monospace,Consolas,monospace;font-size:13px;font-weight:600}
+  .tag{font-size:11px;padding:1px 7px;border-radius:4px;border:1px solid;font-weight:600}
+  .tag.sp{color:var(--sp);border-color:#cfe0f7;background:#f2f7fe}
+  .tag.sd{color:var(--sd);border-color:#e0d5f7;background:#f6f2fe}
+  .tag.sb{color:var(--sb);border-color:#f0dcc4;background:#fdf6ec}
+  .camp-body{padding:0 14px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--ink-3);font-weight:500;font-size:12px;
+    padding:8px 8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:9px 8px;border-bottom:1px solid #f0f2f5;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.name{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;color:var(--ink)}
+  .kw{display:inline-block;background:#f3f5f8;border:1px solid #e6e9ee;border-radius:4px;
+    padding:0 6px;margin:1px 3px 1px 0;font-size:12px;color:var(--ink-2)}
+  .muted{color:var(--ink-3)}
+  .ok{color:var(--ok);background:var(--ok-soft);border-radius:4px;padding:0 6px;font-size:12px}
+  .wait{color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:0 6px;font-size:12px}
+  .flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--ink-3);
+    font-size:12px;margin:6px 0 20px}
+  .flow i{font-style:normal;color:#c3cad5}
+  footer{margin-top:26px;color:var(--ink-3);font-size:12px;line-height:1.9}
+  @media (max-width:720px){.camp-body{padding:0 8px}td,th{padding:8px 5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="tpl-note">模板文件：把下面每一层替换成实际数据后删除本提示。层级固定为
+    广告组合 → 广告活动 → 广告组 → 关键词/定向 → 预算与竞价。</div>
+
+  <h1>广告结构示意图 · {{ASIN}} · {{站点}}</h1>
+  <div class="sub">{{产品名}} ｜ 运营：{{OP英文名}} ｜ 更新：{{日期}}</div>
+
+  <div class="flow">
+    广告组合 <i>→</i> 广告活动 <i>→</i> 广告组 <i>→</i> 关键词 / 定向 <i>→</i> 预算与竞价
+  </div>
+
+  <div class="kpi">
+    <div><span>广告活动数</span><b>4</b></div>
+    <div><span>广告组数</span><b>5</b></div>
+    <div><span>日预算合计</span><b>£55</b></div>
+    <div><span>可投类型</span><b>仅 SP</b></div>
+  </div>
+
+  <!-- ============ 组合 1 ============ -->
+  <div class="portfolio">
+    <div class="pf-head">
+      <span class="pf-name">Leo-A0001</span>
+      <span class="chip">SPU A0001</span>
+      <span class="pf-meta">多店铺运营 → 组合用子 ASIN 命名</span>
+    </div>
+
+    <!-- Campaign -->
+    <div class="camp">
+      <div class="camp-head">
+        <span class="tag sp">SP</span>
+        <span class="camp-name">Leo-A0001A-SP-AT</span>
+        <span class="chip">自动投放</span>
+        <span class="muted">日预算 £10 ｜ 动态竞价-只降低</span>
+      </div>
+      <div class="camp-body">
+        <table>
+          <tr><th style="width:34%">广告组</th><th style="width:20%">投放</th><th>关键词 / 定向</th><th style="width:14%">状态</th></tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-AT-[CloseMatch]</td>
+            <td>自动 · 紧密匹配</td>
+            <td><span class="kw">自动</span><span class="muted">否定：trap bar / with mat</span></td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-AT-[LooseMatch]</td>
+            <td>自动 · 宽泛匹配</td>
+            <td><span class="kw">自动</span></td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-AT-[Substitutes]</td>
+            <td>自动 · 同类商品</td>
+            <td><span class="kw">自动</span></td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-AT-[Complements]</td>
+            <td>自动 · 关联商品</td>
+            <td><span class="kw">自动</span></td>
+            <td><span class="wait">待确认</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Campaign -->
+    <div class="camp">
+      <div class="camp-head">
+        <span class="tag sp">SP</span>
+        <span class="camp-name">Leo-A0001A-SP-MT-KT-EX-[LongTail]</span>
+        <span class="chip">精确匹配</span>
+        <span class="muted">日预算 £20 ｜ 动态竞价-提高和降低</span>
+      </div>
+      <div class="camp-body">
+        <table>
+          <tr><th style="width:34%">广告组</th><th style="width:20%">投放</th><th>关键词（起始出价 / 词数上限）</th><th style="width:14%">状态</th></tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-MT-KT-EX-[LongTail]-[01]</td>
+            <td>手动 · 关键词 · 精确</td>
+            <td>
+              <span class="kw">folding gymnastics mat £0.62</span>
+              <span class="kw">thick exercise mat home £0.55</span>
+              <span class="muted">3 / 50</span>
+            </td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-MT-KT-EX-[LongTail]-[Defend]</td>
+            <td>手动 · 关键词 · 精确</td>
+            <td><span class="kw">gymnastics mat 4ft £0.70</span><span class="muted">1 / 50</span></td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Campaign -->
+    <div class="camp">
+      <div class="camp-head">
+        <span class="tag sp">SP</span>
+        <span class="camp-name">Leo-A0001A-SP-MT-PAT-IP-[CompetitorASIN]</span>
+        <span class="chip">商品定向</span>
+        <span class="muted">日预算 £15 ｜ 固定竞价</span>
+      </div>
+      <div class="camp-body">
+        <table>
+          <tr><th style="width:34%">广告组</th><th style="width:20%">投放</th><th>定向（只写 ASIN，不写品牌名）</th><th style="width:14%">状态</th></tr>
+          <tr>
+            <td class="name">Leo-A0001A-SP-MT-PAT-IP-[CompetitorASIN]</td>
+            <td>手动 · 商品定向</td>
+            <td><span class="kw">B0XXXXXXXX</span><span class="kw">B0YYYYYYYY</span></td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Campaign：没有 SKU 时，第二段标识符直接用子 ASIN（示例） -->
+    <div class="camp">
+      <div class="camp-head">
+        <span class="tag sp">SP</span>
+        <span class="camp-name">Leo-B0GTP1LW7S-SP-MT-KT-EX-[LongTail]</span>
+        <span class="chip">无 SKU → 用 ASIN</span>
+        <span class="chip">精确匹配</span>
+        <span class="muted">日预算 £10 ｜ 动态竞价-只降低</span>
+      </div>
+      <div class="camp-body">
+        <table>
+          <tr><th style="width:34%">广告组</th><th style="width:20%">投放</th><th>关键词（起始出价 / 词数上限）</th><th style="width:14%">状态</th></tr>
+          <tr>
+            <td class="name">Leo-B0GTP1LW7S-SP-MT-KT-EX-[LongTail]</td>
+            <td>手动 · 关键词 · 精确</td>
+            <td><span class="kw">folding gymnastics mat £0.58</span><span class="muted">1 / 50</span></td>
+            <td><span class="ok">启用</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    命名依据：《广告管理规范V1.0》§5.1–5.5。自定义内容已转英文、`【】` 改 ASCII `[]`（规范正文要求全英文，与示例的中文写法存在冲突，此处按正文处理）。<br>
+    第二段标识符：有子 SKU 用子 SKU；没有 SKU（竞品链接、未建编码、代运营未接 ERP）直接用子 ASIN，见最后一张卡。<br>
+    广告类型：只做 SP（商品广告），SD / SB / SBV 不建，因此不涉及「新品 16 周内不做 SD/SB」闸门。<br>
+    待确认项见方案正文的「待确认清单」，本图不替未定项做假设。
+  </footer>
+</div>
+</body>
+</html>

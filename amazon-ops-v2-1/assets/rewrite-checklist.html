@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>卖点改写检查清单（表达落点口径）</title>
+<style>
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:#f6f7f9;color:#1c2330;margin:0;padding:24px;font-size:14px;line-height:1.65}
+  .wrap{max-width:900px;margin:0 auto}
+  .hero{background:#fff;border:1px solid #e3e6ec;border-radius:14px;padding:20px 24px;margin-bottom:18px}
+  h1{font-size:20px;margin:0 0 8px;font-weight:600}
+  .chip{display:inline-block;border-radius:999px;padding:3px 12px;font-size:12.5px;font-weight:500;margin:2px 4px 2px 0}
+  .c-blue{background:#e6f1fb;color:#185fa5}.c-teal{background:#e1f5ee;color:#0f6e56}.c-amber{background:#faeeda;color:#854f0b}.c-red{background:#fcebeb;color:#a32d2d}.c-purple{background:#eeedfe;color:#534ab7}
+  section{background:#fff;border:1px solid #e3e6ec;border-radius:14px;padding:18px 22px;margin-bottom:16px}
+  h2{font-size:15.5px;margin:0 0 12px;font-weight:600}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+  th{background:#f1f3f7;text-align:left;padding:7px 10px;font-weight:500;border-bottom:1px solid #e3e6ec}
+  td{padding:7px 10px;border-bottom:1px solid #eef0f4;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .warn{background:#fff8ec;border:1px solid #f0d9a0;border-radius:10px;padding:12px 16px;margin-top:8px;font-size:13.5px}
+  .rule{background:#fafbfd;border:1px solid #e8ebf0;border-radius:10px;padding:10px 14px;margin:8px 0}
+  code{background:#f1f3f7;border-radius:4px;padding:1px 6px;font-family:Consolas,monospace;font-size:12.5px;color:#0c447c}
+  .note{color:#69707d;font-size:12.5px;margin-top:8px}
+  ol,ul{margin:6px 0;padding-left:22px}
+  li{margin:4px 0}
+  .big{font-size:15px;font-weight:500;background:#e1f5ee;border-left:4px solid #0f6e56;border-radius:0 10px 10px 0;padding:12px 16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>卖点改写检查清单（表达落点口径）</h1>
+    <span class="chip c-teal">2026-11-06 用户拍板</span>
+    <span class="chip c-blue">适用：Amazon / Temu / TikTok / SHEIN / eBay 全平台</span>
+    <span class="chip c-purple">配套校验：_check*.js 第39项 · check_listing.py ABSOLUTE_BANNED</span>
+    <p style="margin:12px 0 0"><b>用途</b>：写或改写任何卖点（五点 / Highlights / 描述 / A+ 文案）时，逐项过一遍本清单。四步法是动作，红线是驳回条件，机器闸门是最后一道。</p>
+  </div>
+
+  <section>
+    <h2>一句话原则</h2>
+    <div class="big">同一批已核实的事实，只换落点和主语——从「我有什么」改成「你不用担什么」。事实、数字、承诺一个都不新增。</div>
+    <p style="margin:10px 0 0">客户是在「选错会怎样」上做比较，不是在「谁更专业」上做比较。功能罗列等于把可比较条目摆上桌，客户顺势比价；把同一条事实落到他要避免的失误上，卖点才从成本变成价值。</p>
+  </section>
+
+  <section>
+    <h2>第一步 · 列「客户会犯的错」，不要先列功能</h2>
+    <p>跨境 FBM 常见退货成因（逐条核对，非排序）——每条问自己：本产品能回应哪一条？</p>
+    <table>
+      <tr><th>#</th><th>客户会犯的错</th><th>写法落点示例</th></tr>
+      <tr><td>1</td><td>尺寸/容量买错</td><td>引导看尺寸图；写「先量再买」（须先有准确尺寸数据）</td></tr>
+      <tr><td>2</td><td>装不上 / 不会装</td><td>写明结构与摆放方式（有图证才写）</td></tr>
+      <tr><td>3</td><td>材质与预期不符（含气味）</td><td>材质有出处才写；开放结构=看得见</td></tr>
+      <tr><td>4</td><td>用几次就坏 / 承重不够</td><td>只写有实测的承重；无数据一字不提</td></tr>
+      <tr><td>5</td><td>与已有设备不兼容</td><td>写清适配范围（有实测才写）</td></tr>
+      <tr><td>6</td><td>到货赶不上时间点</td><td>FBM 不写时效，除非有实测数据</td></tr>
+      <tr><td>7</td><td>退换麻烦 / 售后找不到人</td><td>描述里写使用边界，降低错买率</td></tr>
+      <tr><td>8</td><td>配件缺失</td><td>随包清单有资料才写</td></tr>
+      <tr><td>9</td><td>颜色与屏幕显示有差</td><td>多光源实拍图（图片层解决）</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>第二步 · 每个「错」回 facts 找一条硬事实</h2>
+    <div class="rule">✅ 找得到 → 进入第三步落点改写<br>❌ 找不到 → <b>删掉这条错，不写</b>。绝不反向：先想一句好听的话再去找依据。</div>
+    <p>出处仅限三种：facts 字段 / 产品实拍图 / 工厂或实测数据。「竞品也这么写」不是出处。</p>
+  </section>
+
+  <section>
+    <h2>第三步 · 用三种句式落点（都要有依据支撑）</h2>
+    <table>
+      <tr><th>句式</th><th>模板</th><th>示例（须有依据）</th></tr>
+      <tr><td>消除担心</td><td>No / Without + 客户怕的失误</td><td><code>No wobble on uneven ground</code>（依据：结构件/图片）</td></tr>
+      <tr><td>免除将就</td><td>不用为了 X 将就</td><td><code>Without giving up floor space</code>（依据：收纳尺寸）</td></tr>
+      <tr><td>主动给边界</td><td>Fits … / Made for … / 不适合 …</td><td><code>Made for indoor use</code>（依据：实测或工厂说明）</td></tr>
+    </table>
+    <div class="note">边界句（说清不适合什么）比承诺句更可信，且完全合规——这是「确定感」唯一的合法来源。</div>
+  </section>
+
+  <section>
+    <h2>第四步 · 回查出处（逐词）</h2>
+    <div class="rule">改写句里<b>每个名词、每个数字</b>，必须能定位到 facts 字段、图片或实测记录；查不到就退回功能原句——宁可朴素，不能悬空。</div>
+  </section>
+
+  <section>
+    <h2>五点排序（与主攻词分配同一次做）</h2>
+    <ul>
+      <li>第 1 条压<b>最大的退货风险</b>（通常是尺寸/适配）</li>
+      <li>中间三条讲使用中会踩的坑</li>
+      <li>最后一条处理「买了之后怎么办」（配件/组装/搬运/售后路径）</li>
+    </ul>
+    <div class="note">硬指标不变：每条 ≤500、Title Case 小标题 + 1–2 句、5 条主攻 5 个不同词、主攻词不与 Title 完整短语冲突。</div>
+  </section>
+
+  <section>
+    <h2>四问自检（每条卖点过一遍）</h2>
+    <table>
+      <tr><th>#</th><th>问题</th><th>不过关的处理</th></tr>
+      <tr><td>1</td><td>删掉 our / this 之后，句子还成立吗？</td><td>成立 = 还在证明自己 → 换买方视角重写</td></tr>
+      <tr><td>2</td><td>竞品能不能一字不改抄走？</td><td>能 = 还是产品坐标 → 落到具体失误上</td></tr>
+      <tr><td>3</td><td>客户读完知道自己「不用担什么」了吗？</td><td>没有 → 回第一步重新对错</td></tr>
+      <tr><td>4</td><td>每个数字与名词能回查到出处吗？</td><td>不能 → 删词或退回原句</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>红线（人工驳回条件）</h2>
+    <ul>
+      <li><b>禁止为了「托底感」新增任何承诺</b>：guaranteed / warranty / 时效承诺 / 绝对化断言（never / won't break / no leak / rust-proof）。<code>no X</code> 句式仍是主张，同样要有依据。</li>
+      <li><b>FBM 业务</b>：物流时效除有实测数据不写；保修除确实提供不写。</li>
+      <li>不写价格、促销、与竞品对比（better than other brands）；不写 <code>Best for</code>（触发禁用词 best），改 <code>Made for</code> / <code>For indoor use</code>。</li>
+      <li>禁用词表照旧（best / perfect / 100% / waterproof / heavy duty / non-toxic / eco-friendly / certified …）。</li>
+      <li>变体属性词（颜色/尺寸/层数）不进父体共享字段（Title / Highlights / 五点 / 描述 / ST）。</li>
+      <li>客户会验证（收货、量尺寸、组装）——错一句就是 1 星加退货。<b>Listing 是事实场域，不是话术场域。</b></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>机器闸门（人工过完自动兜底）</h2>
+    <table>
+      <tr><th>闸门</th><th>拦什么</th><th>位置</th></tr>
+      <tr><td><code>_check*.js</code> 第 39 项 [A]</td><td>无绝对化断言/承诺：never、guarantee、warranty、unbreakable、rust-proof、leak-proof、no leak、any weight、bulletproof、won't/will not + 晃断漏锈类动词</td><td>Listing_*\/_工作脚本\（JS 流水线）</td></tr>
+      <tr><td><code>check_listing.py</code> ABSOLUTE_BANNED</td><td>同口径禁词（warranty、won't、rust-proof 等 2026-11-06 已并入）</td><td>amazon-ops-v2（Python 流水线）</td></tr>
+      <tr><td>四道闸门（五平台系统）</td><td>事实反查 / 未验证拦截 / 五平台机检 PASS / 产品级校验</td><td>_文案系统</td></tr>
+    </table>
+    <div class="warn"><b>两个已知取舍（人工复核用）</b><br>
+    ① JS 版对 <code>never</code> 无条件拦截：<code>never needs assembly</code> 这类合法句会误伤 → 改写为 <code>no assembly needed</code>（前提：确实免组装）。<br>
+    ② Python 版对 <code>won't</code> 是全拦（无动词白名单）：<code>won't fit</code> 这类边界句会被判 ERROR → 人工复核后可放行，或改写为 <code>fits where a full table will not</code> 这类结构。</div>
+  </section>
+
+  <section>
+    <h2>A+ 与图片：零承诺托底（优先级最高）</h2>
+    <ul>
+      <li><b>尺码对照表 / 兼容清单 / 组装步骤 / 使用边界（不适合什么）</b>——不承诺任何结果，只消除信息不对称，是全套文档里合规性最高的托底手段。</li>
+      <li>图片同理：尺寸图、安装图解、内容物清单，全是「给确定性」而不是「给承诺」。</li>
+      <li>出图提示词口径：不出现小孩；不画实物没有的功能；文字标注后期加。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>一个 60 秒完整走查示例（B0H3TCN692 抽拉篮）</h2>
+    <table>
+      <tr><th>功能原句（产品坐标）</th><th>落点改写（风险坐标）</th><th>依据</th></tr>
+      <tr><td>加厚金属网篮</td><td>瓶罐排好队，要用的那瓶第一个到你手上</td><td>网篮结构（图证）</td></tr>
+      <tr><td>抽拉式设计</td><td>柜子深处自己来到你面前，不用把手伸进去摸</td><td>篮沿框架滑动（图证）</td></tr>
+      <tr><td>开放式网面</td><td>每个标签一眼可见，潮气不闷在里面</td><td>mesh 开放结构（图证）</td></tr>
+      <tr><td>带提手</td><td>做饭时把篮子提到台面上，随手取用</td><td>提手（图证）</td></tr>
+    </table>
+    <div class="note">注意：右列没有任何一个新增事实——全部来自左列同一批图证，只是换了「客户怕什么」的落点。</div>
+  </section>
+
+</div>
+</body>
+</html>

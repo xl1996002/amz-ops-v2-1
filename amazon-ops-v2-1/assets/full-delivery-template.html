@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{产品名}} · {{站点}} · 全链路交付（{{ASIN}}）</title>
+<!--
+  合并交付模板 · 基于 Amazon-ops-v2.1
+  用法：复制本文件 → 替换所有 {{占位}} → 按章节填入已完成的六项内容。
+  要求：浅色白底；单文件自包含（无外链 CSS/JS）；顶部导航可跳转；六个 section 一个不能少。
+  注意：本文件内容必须与各独立文件同源。合并后如再改独立文件，必须重跑 check_consistency.py。
+-->
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#fff; --line:#e4e7ec; --ink:#1f2733; --ink2:#5b6675; --ink3:#8b95a5;
+    --accent:#2f6fd0; --accent-soft:#eaf1fb; --ok:#1f7a4d; --ok-soft:#eaf6ef;
+    --warn:#b4601a; --warn-soft:#fdf3e7; --off:#8b95a5; --off-soft:#f1f3f6; --code:#f3f5f8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:14px/1.7 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+  .wrap{max-width:1080px;margin:0 auto;padding:26px 20px 70px}
+  h1{font-size:22px;margin:0 0 6px}
+  .sub{color:var(--ink2);font-size:13px;margin-bottom:14px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .chip{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;
+    background:var(--accent-soft);color:var(--accent);border:1px solid #d5e3f8}
+  .chip.ok{background:var(--ok-soft);color:var(--ok);border-color:#cfe9db}
+  .chip.no{background:var(--off-soft);color:var(--off);border-color:#e3e7ec}
+  nav{position:sticky;top:0;z-index:9;background:rgba(246,247,249,.94);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:18px;display:flex;gap:6px;flex-wrap:wrap}
+  nav a{font-size:12.5px;color:var(--ink2);text-decoration:none;padding:4px 10px;border-radius:6px;
+    border:1px solid var(--line);background:#fff}
+  nav a:hover{color:var(--accent);border-color:#cfe0f7}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:20px 22px;margin-bottom:18px}
+  section>h2{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  section>h2 em{font-style:normal;font-size:12px;color:#fff;background:var(--accent);
+    border-radius:5px;padding:1px 7px}
+  .lead{color:var(--ink2);font-size:13px;margin:0 0 16px}
+  h3{font-size:14px;margin:20px 0 8px;padding-left:9px;border-left:3px solid var(--accent)}
+  h4{font-size:13px;margin:14px 0 6px;color:var(--ink2)}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    overflow-x:auto;font:12.5px/1.7 ui-monospace,Consolas,monospace;margin:8px 0;
+    white-space:pre-wrap;word-break:break-word}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  th{text-align:left;color:var(--ink3);font-weight:500;font-size:12px;background:#fbfcfe;
+    padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:8px;border-bottom:1px solid #f0f2f5;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  .mono{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+  .ok{color:var(--ok);background:var(--ok-soft);border-radius:4px;padding:0 6px;font-size:12px}
+  .warn{color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:0 6px;font-size:12px}
+  .off{color:var(--off);background:var(--off-soft);border-radius:4px;padding:0 6px;font-size:12px}
+  .muted{color:var(--ink3)}
+  .kw{display:inline-block;background:var(--code);border:1px solid #e6e9ee;border-radius:4px;
+    padding:0 6px;margin:1px 3px 1px 0;font-size:12px;color:var(--ink2)}
+  .kw b{color:var(--ink)}
+  .note{background:var(--warn-soft);border:1px solid #f0d9bd;color:var(--warn);
+    border-radius:8px;padding:9px 12px;font-size:12.5px;margin:10px 0;line-height:1.75}
+  .note.blue{background:var(--accent-soft);border-color:#d5e3f8;color:#26538f}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .portfolio{border:1px solid var(--line);border-radius:10px;padding:14px;margin-top:8px}
+  .pf-head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    padding-bottom:10px;border-bottom:1px dashed var(--line);margin-bottom:12px}
+  .pf-name{font-family:ui-monospace,Consolas,monospace;font-size:14px;font-weight:600}
+  .camp{border:1px solid var(--line);border-radius:9px;margin-bottom:12px;overflow:hidden}
+  .camp-head{display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:#fbfcfe;
+    padding:9px 12px;border-bottom:1px solid var(--line)}
+  .camp-name{font-family:ui-monospace,Consolas,monospace;font-size:12px;font-weight:600}
+  .tag{font-size:11px;padding:1px 7px;border-radius:4px;border:1px solid;
+    font-weight:600;color:var(--accent);border-color:#cfe0f7;background:#f2f7fe}
+  .camp-body{padding:0 12px}
+  .bud{display:flex;height:24px;border-radius:6px;overflow:hidden;border:1px solid var(--line);margin:8px 0 6px}
+  .bud span{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px}
+  .b1{background:#2f6fd0}.b2{background:#4a8ade}.b3{background:#7aa8e6}.b4{background:#a8c6ef;color:#1f2733!important}
+  footer{color:var(--ink3);font-size:12px;line-height:1.9;text-align:center;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>{{产品名}} · {{站点}} · 全链路交付</h1>
+  <div class="sub">{{自有/竞对}} {{ASIN}}（{{品牌}}）｜ £{{价格}} · {{评论数}} 评论 · {{上架周数}} 周 · {{FBA/FBM}} ｜ 交付 {{日期}} ｜ 依据：写页面（第四版）+ 广告管理规范V1.0</div>
+  <div class="chips">
+    <span class="chip {{ok}}">Listing 校验 {{PASS}}</span>
+    <span class="chip {{ok}}">广告命名校验 {{PASS}}</span>
+    <span class="chip">只做 SP</span>
+    <span class="chip">日预算 £{{预算}}</span>
+    <!-- 产品口径 chips：已确认事实逐条列出，缺失项用 no -->
+  </div>
+
+  <nav>
+    <a href="#s1">1 Listing 文案</a>
+    <a href="#s2">2 作图提示词 · 主副图</a>
+    <a href="#s3">3 作图提示词 · A+</a>
+    <a href="#s4">4 广告方案（需明确要求）</a>
+  </nav>
+
+  <!-- ========== 1 Listing：13 段，顺序不可调 ========== -->
+  <section id="s1">
+    <h2><em>1</em>Listing 文案</h2>
+    <p class="lead">关键词表 → 定位 → Title → Highlights → 五点 → 双版描述 → ST → 图片 → A+ → 中文 → 核对 → 自检。校验 <span class="ok">RESULT: PASS</span></p>
+    <!-- 1.1 关键词表与分配 / 1.2 定位分析 / 1.3 Title / 1.4 Highlights / 1.5 五点
+         1.6 HTML 描述（&lt;b&gt; 转义）/ 1.7 Plain 描述 / 1.8 Search Terms / 1.9 图片规范
+         1.10 A+ 建议（指向第 3 章）/ 1.11 中文翻译 / 1.12 覆盖核对 / 1.13 自检 / 1.14 已确认事实 + 待确认 -->
+  </section>
+
+  <!-- ========== 2 作图提示词 · 主副图（与第 3 章同一份 MD） ========== -->
+  <section id="s2">
+    <h2><em>2</em>作图提示词 · 主副图</h2>
+    <p class="lead">主图 1 条 + 副图最多 6 条，每条六要素（主体/构图/风格/光线/色调/比例）+ 一句「要说服买家什么」。<b>本章与第 3 章合并写入同一份 <code>{ASIN}_作图提示词_{日期}.md</code> 的第一部分</b>，合并版分两章只为便于阅读，章节数不等于文件数。</p>
+    <!-- 通用前缀 / 通用负面词 / 2.1 主图 / 2.2–2.7 副图 / 红线 -->
+  </section>
+
+  <!-- ========== 3 作图提示词 · A+（与第 2 章同一份 MD） ========== -->
+  <section id="s3">
+    <h2><em>3</em>作图提示词 · A+</h2>
+    <p class="lead">模块规划 + 中英文案 + 四句底图提示词（留标注位）。<b>续写进同一份 <code>{ASIN}_作图提示词_{日期}.md</code> 的第二部分</b>，不另起文件。</p>
+    <!-- 3.1 模块栈 / 3.2 逐图位文案+提示词 / 3.3 合规红线 / 3.4 发布前检查 -->
+  </section>
+
+  <!-- ========== 4 广告方案（单文件 HTML） ========== -->
+  <section id="s4">
+    <h2><em>4</em>广告方案（单文件 HTML，需明确要求）</h2>
+    <p class="lead">整个广告输出只有<b>一个 HTML</b>：①阶段节奏 ②配置表 ③结构视图 ④止损线。命名对齐《广告管理规范V1.0》§5.1–5.5，只做 SP。<b>配置表与结构图不再单独成文件</b>；未明确要求广告时，本章整章不出现。</p>
+    <!-- 直接引用 assets/ads-plan-template.html 的渲染结果 -->
+  </section>
+
+  <!-- ========== 5 广告组配置（口径变更：已并入第 4 章） ========== -->
+  <section id="s5">
+    <h2><em>5</em>广告组逐条配置 <span style="font-size:11px;color:#94928A">（已并入第 4 章）</span></h2>
+    <p class="lead">口径变更：不再单独产出 adgroups.csv 或独立章节；配置表在广告方案 HTML 的第 ② 块，右上可导出 CSV。以下字段表保留供自定义扩展。</p>
+    <!-- G1…Gn 每组一个字段表 -->
+  </section>
+
+  <!-- ========== 6 结构图（口径变更：已并入第 4 章） ========== -->
+  <section id="s6">
+    <h2><em>6</em>广告结构图 <span style="font-size:11px;color:#94928A">（已并入第 4 章）</span></h2>
+    <p class="lead">口径变更：结构视图在广告方案 HTML 的第 ③ 块，只显层级与数量，不重复字段值。以下示例保留供自定义扩展。</p>
+    <div class="portfolio">
+      <div class="pf-head">
+        <span class="pf-name">{{组合名}}</span>
+        <span class="chip">Portfolio</span>
+        <span class="chip">{{N 活动}} / {{N 组}}</span>
+        <span class="chip">£{{预算}} / 日</span>
+        <span class="chip no">仅 SP</span>
+      </div>
+      <!-- 每个活动一张 .camp -->
+      <h4 style="font-size:13px;margin:14px 0 4px;color:#5b6675">预算分配（£{{预算}} / 日）</h4>
+      <div class="bud">
+        <span class="b1" style="width:{{p1}}%">C1 自动 £{{b1}}</span>
+        <span class="b2" style="width:{{p2}}%">C2 精确 £{{b2}}</span>
+        <span class="b3" style="width:{{p3}}%">C3 词组 £{{b3}}</span>
+        <span class="b4" style="width:{{p4}}%">C4 定向 £{{b4}}</span>
+      </div>
+      <div class="muted" style="font-size:12px">预算按阶段给，数值与出处见配置表；不做无依据推导</div>
+    </div>
+  </section>
+
+  <footer>
+    命名依据：《广告管理规范V1.0》§5.1–5.5，第二段标识符 {{子SKU 或 子ASIN}}。<br>
+    广告类型：只做 SP，不建 SD / SB / SBV。<br>
+    产品口径：{{已确认事实逐条}}。<br>
+    待补：{{待确认清单}}。
+  </footer>
+</div>
+</body>
+</html>

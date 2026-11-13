@@ -1,0 +1,14 @@
+﻿字段顺序,字段名(English),字段名(中文),取值说明,缺失时
+1,Portfolio,广告组合,"一个 SPU 一个组合；命名见规范 §5.1：运营英文名-ASIN（单店）或 -子ASIN（多店）；父ASIN对应多个SPU时用亚马逊父ASIN",待补充
+2,Campaign name,广告活动名,"运营英文名-子SKU-投放形式缩写-[自定义内容]；没有 SKU 的用子 ASIN；缩写 3-5 段，- 分隔；全 ASCII",待补充
+3,Ad group name,广告组名,"广告活动名-[自定义分类]；同活动下活动名部分逐字一致（标识符随之继承，不再单独写 SKU/ASIN）",待补充
+4,Daily budget,每日预算,"填数值 + 币种；需给出推导（目标订单×CPC÷预估CVR 或 阶段策略），不接受无依据区间",待补充
+5,Campaign type,广告活动类型,"只填 SP（商品广告）；SD / SB / SBV 一律不做，不进方案",待补充
+6,Targeting mode,广告投放定位,自动 / 手动,"待补充"
+7,Bidding strategy,竞价策略,"动态竞价-只降低 / 动态竞价-提高和降低 / 固定竞价",待补充
+8,Keywords,投放关键词,"一行一个词；组内数量上限：大词5 中词10 长尾50（按 ABA 排名判定）",无（商品定向组填 none）
+9,Match type,匹配方式,"exact / phrase / broad",无
+10,TARGETING GROUPS,投放分组,"关键词组 / 商品定向 ASIN / 类目节点 / 受众；ASIN 只写具体 ASIN，不写竞品品牌名",待补充
+11,Negative keyword / Negative product,否定词/否定商品,"按类型分：品类不相关 / 产品不匹配 / 合规禁区词",none
+12,Bid adjustments,竞价调整,"按位置或受众：Top of search / Product pages / Rest of search 的百分比",0
+13,Status / Launch stage,状态与投放阶段,"启用 / 暂停 / 待条件满足（如待16周解锁）",待补充

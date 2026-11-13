@@ -1,0 +1,34 @@
+{
+  "site": "UK",
+  "brand_forbidden": ["AcmeMat"],
+  "listing": {
+    "title": "Stainless Steel Measuring Cups Set, 4 Piece Stackable for Baking",
+    "item_highlights": "Dishwasher Safe, Nesting Storage, Metric Markings, Rust Resistant",
+    "bullets": [
+      "【Accurate Measurements】 Clear markings let you follow any recipe without conversion errors, so a bake stays accurate from the first scoop.",
+      "【Stackable Storage】 These stackable measuring cups nest inside each other and fit a shallow kitchen drawer, keeping counters clear in compact UK kitchens.",
+      "【Rust Resistant Build】 Thick stainless steel keeps its shape after daily use and will not pick up smells from strong ingredients.",
+      "【Easy To Clean】 Smooth interiors release sticky dough in seconds, and every cup is dishwasher safe for fast cleanup.",
+      "【Ready For Home Bakers】 Four baking cups cover spoon to cup measures, a practical set for home bakers working through family recipes."
+    ],
+    "description_html": "<p><b>Stainless Steel Measuring Cups Set</b> includes 4 stackable cups for precise measuring. Clear metric and US markings let you follow any recipe with confidence. They work as measuring cups for baking and everyday cooking alike, whether you are weighing flour for bread or scooping sugar for a family cake.</p><p>The nesting design saves drawer space, which suits compact kitchens where worktop room is limited. Each cup sits inside the next, so the whole set stores in the footprint of the largest one. Smooth interiors release sticky dough and wipe clean in seconds.</p><p>Set includes 1 cup, 1/2 cup, 1/3 cup and 1/4 cup. All four cups are dishwasher safe and rust resistant for long lasting use. Please note the set is designed for dry and semi liquid ingredients rather than liquids taken straight from the hob.</p>",
+    "description_plain": "Stainless Steel Measuring Cups Set includes 4 stackable cups for precise measuring. Clear metric and US markings let you follow any recipe with confidence. They work as measuring cups for baking and everyday cooking alike, whether you are weighing flour for bread or scooping sugar for a family cake.\n\nThe nesting design saves drawer space, which suits compact kitchens where worktop room is limited. Each cup sits inside the next, so the whole set stores in the footprint of the largest one. Smooth interiors release sticky dough and wipe clean in seconds.\n\nSet includes 1 cup, 1/2 cup, 1/3 cup and 1/4 cup. All four cups are dishwasher safe and rust resistant for long lasting use. Please note the set is designed for dry and semi liquid ingredients rather than liquids taken straight from the hob.",
+    "search_terms": "measuring jugs kitchen tools cake making scoop accessories home baker gift"
+  },
+  "keywords": {
+    "core": ["measuring cups", "measuring cup set", "baking cups"],
+    "long_tail": ["stainless steel measuring cups", "stackable measuring cups", "measuring cups for baking"],
+    "attribute": ["4 piece", "metric markings"],
+    "scenario": ["baking", "kitchen drawer"],
+    "audience": ["home bakers"],
+    "synonym": ["measuring jugs", "kitchen tools"],
+    "alternative": ["cake making scoop", "accessories"]
+  },
+  "allocation": {
+    "Title": ["measuring cups", "4 piece", "baking"],
+    "Item Highlights": ["metric markings"],
+    "五点": ["stackable measuring cups", "kitchen drawer", "home bakers", "baking cups"],
+    "描述": ["measuring cups for baking"],
+    "Search Terms": ["measuring jugs", "kitchen tools", "cake making scoop"]
+  }
+}

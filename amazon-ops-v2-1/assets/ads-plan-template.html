@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>广告方案</title>
+<style>
+  :root{
+    --bg:#F6F5F2; --card:#FFFFFF; --ink:#1C1C19; --sub:#6B6A64; --mute:#94928A;
+    --line:#E6E3DC; --line-soft:#F0EEE8; --accent:#0F6E56; --accent-soft:#E1F5EE;
+    --good:#3B6D11; --good-bg:#EAF3DE; --warn:#854F0B; --warn-bg:#FAEEDA;
+    --bad:#A32D2D; --bad-bg:#FCEBEB; --info:#185FA5; --info-bg:#E7F0FA;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:13px;line-height:1.55;-webkit-font-smoothing:antialiased;padding:16px 18px 22px;}
+  .wrap{max-width:1240px;margin:0 auto;}
+  header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;flex-wrap:wrap;}
+  .h-left{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0;}
+  h1{font-size:19px;font-weight:600;margin:0;letter-spacing:-.01em;white-space:nowrap;}
+  .h-sub{font-size:12px;color:var(--mute);}
+  .h-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .btn{font:inherit;font-size:12px;color:var(--sub);background:#fff;border:1px solid var(--line);
+    border-radius:7px;padding:5px 11px;cursor:pointer;transition:.15s;white-space:nowrap;}
+  .btn:hover{border-color:#C9C5BA;color:var(--ink);}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#0c5b47;color:#fff;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;}
+  .card-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:9px;flex-wrap:wrap;}
+  .card-h h2{font-size:13px;font-weight:600;margin:0;letter-spacing:.01em;}
+  .card-h .note{font-size:10.5px;color:var(--mute);}
+  .phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  .phase{border:1px solid var(--line-soft);border-radius:9px;padding:11px 12px;background:#FDFCFA;}
+  .phase.now{border-color:#9FE1CB;background:var(--accent-soft);}
+  .phase h3{font-size:12.5px;margin:0 0 6px;font-weight:600;display:flex;justify-content:space-between;gap:6px;align-items:baseline;}
+  .phase h3 span{font-size:10px;color:var(--mute);font-weight:400;}
+  .phase dl{margin:0;font-size:11.5px;line-height:1.65;}
+  .phase dt{color:var(--mute);font-size:10.5px;margin-top:5px;}
+  .phase dd{margin:0;color:var(--sub);}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:8px;}
+  table{width:100%;border-collapse:collapse;font-size:11.5px;background:#fff;}
+  thead th{background:#FAF9F6;color:var(--mute);font-weight:500;font-size:10.5px;text-align:left;
+    padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap;position:sticky;top:0;}
+  tbody td{padding:5.5px 8px;border-bottom:1px solid var(--line-soft);vertical-align:top;white-space:nowrap;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover td{background:#FCFBF8;}
+  td.mono,.mono{font-family:ui-monospace,Consolas,"SF Mono",monospace;font-size:10.5px;letter-spacing:-.2px;}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  td.dup{color:var(--mute);}
+  td.over{color:var(--bad);font-weight:600;}
+  .tag{display:inline-block;font-size:10px;padding:0 5px;border-radius:3px;background:#F0EEE8;color:var(--sub);}
+  .tag.sp{background:var(--info-bg);color:var(--info);}
+  .tag.auto{background:#F3ECFA;color:#6B3FA0;}
+  .tree{font-size:12px;}
+  .node{padding:4px 0;}
+  .branch{padding-left:16px;border-left:1px solid var(--line);margin-left:7px;}
+  .node .nm{font-family:ui-monospace,Consolas,monospace;font-size:11px;}
+  .node .meta{color:var(--mute);font-size:10.5px;margin-left:8px;}
+  .lv0{font-weight:600;}
+  .lv1 .nm{color:var(--accent);}
+  .guard td:first-child{color:var(--sub);white-space:normal;}
+  .guard td:last-child{white-space:normal;color:var(--ink);}
+  .micro{margin-top:9px;font-size:10.5px;color:var(--mute);line-height:1.75;}
+  .micro b{color:var(--sub);font-weight:500;}
+  .foot{color:var(--mute);font-size:10.5px;text-align:center;margin-top:16px;line-height:1.8;}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(12px);opacity:0;
+    background:#1C1C19;color:#fff;font-size:12px;padding:8px 16px;border-radius:8px;
+    transition:.22s;pointer-events:none;z-index:99;}
+  .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+  @media (max-width:1000px){
+    .phases{grid-template-columns:1fr;}
+    .kpis{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .h-right,.toast{display:none;}
+    .card{break-inside:avoid;border-color:#ddd;}
+    .tbl-wrap{overflow:visible;}
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <div class="h-left">
+      <h1>广告方案</h1>
+      <span class="h-sub" id="sub">—</span>
+    </div>
+    <div class="h-right">
+      <button class="btn primary" id="copyCfg">复制配置表</button>
+      <button class="btn" id="exportCsv">导出 CSV</button>
+      <button class="btn" id="printBtn">打印</button>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="card-h">
+      <h2>① 什么时候做什么</h2>
+      <span class="note">只讲节奏，不重复配置字段</span>
+    </div>
+    <div class="phases" id="phases"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-h">
+      <h2>② 照这个填后台</h2>
+      <span class="note">「复制配置表」粘 Excel　｜　「导出 CSV」存文件派工</span>
+    </div>
+    <div class="tbl-wrap">
+      <table id="cfg">
+        <thead>
+          <tr>
+            <th>组合</th><th>活动名</th><th>广告组名</th><th>日预算</th>
+            <th>竞价策略</th><th>定位</th><th>匹配</th><th>关键词 / 定向</th>
+            <th>出价</th><th>否定词</th><th>阶段</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="micro" id="cfgNote"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-h">
+      <h2>③ 长什么样</h2>
+      <span class="note">只看层级与数量，字段见 ②</span>
+    </div>
+    <div class="tree" id="tree"></div>
+  </section>
+
+  <section class="card">
+    <div class="card-h">
+      <h2>④ 什么时候停</h2>
+      <span class="note">触发条件 → 动作，不含「持续优化」这类空话</span>
+    </div>
+    <div class="tbl-wrap">
+      <table class="guard" id="guard">
+        <thead><tr><th style="width:46%">触发条件</th><th>动作</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script id="ads-data" type="application/json">
+{
+  "asin": "B0GY87GJMX",
+  "parent_asin": "B0GY878KQJ",
+  "site": "GB",
+  "site_cn": "英国站",
+  "operator": "Leo",
+  "currency": "£",
+  "date": "2026-11-08",
+  "phases": [
+    {
+      "name": "新品期", "span": "0–4 周", "now": true,
+      "goal": "跑出真实 CVR，验证词与产品的相关性",
+      "budget": "£15/天（自动 6 + 手动 9）",
+      "focus": "自动组跑词 + 核心词精确匹配",
+      "exit": "单词累计 ≥30 次点击，或满 4 周"
+    },
+    {
+      "name": "成长期", "span": "5–8 周", "now": false,
+      "goal": "砍不转化的词，放大 ACOS 达标的词",
+      "budget": "£25/天",
+      "focus": "长尾词铺开，否定词收紧",
+      "exit": "稳定出单 ≥8 单/周"
+    },
+    {
+      "name": "成熟期", "span": "9 周起", "now": false,
+      "goal": "把 ACOS 压到可接受区间，交给自然位承接",
+      "budget": "按单量回落，广告占比目标 30–40%",
+      "focus": "只留高效词，加防御组挡竞品",
+      "exit": "—"
+    }
+  ],
+  "portfolios": [
+    { "name": "Leo-B0GY878KQJ" }
+  ],
+  "campaigns": [
+    {
+      "name": "Leo-B0GY87GJMX-SP-AT",
+      "portfolio": "Leo-B0GY878KQJ",
+      "type": "SP",
+      "identifier_kind": "asin",
+      "targeting": "auto",
+      "budget": 6,
+      "bidding": "动态竞价-只降低",
+      "stage": "新品期",
+      "adgroups": [
+        {
+          "name": "Leo-B0GY87GJMX-SP-AT",
+          "tier": "head",
+          "match": "",
+          "keywords": [],
+          "asins": [],
+          "negative": ["trap bar", "with mat", "barbecue"],
+          "note": "自动组负责跑词；否定词随搜索词报告每周补"
+        }
+      ]
+    },
+    {
+      "name": "Leo-B0GY87GJMX-SP-MT-KT-EX",
+      "portfolio": "Leo-B0GY878KQJ",
+      "type": "SP",
+      "identifier_kind": "asin",
+      "targeting": "manual",
+      "budget": 9,
+      "bidding": "动态竞价-只降低",
+      "stage": "新品期",
+      "adgroups": [
+        {
+          "name": "Leo-B0GY87GJMX-SP-MT-KT-EX-[HeadTerms]",
+          "tier": "head",
+          "match": "exact",
+          "keywords": [
+            { "kw": "griddle pan", "bid": 0.51, "vol": 17201 },
+            { "kw": "grill pan", "bid": 0.60, "vol": 16141 },
+            { "kw": "steak pan", "bid": 0.52, "vol": 7736 }
+          ],
+          "asins": [],
+          "negative": [],
+          "note": "大词 3 个（上限 5），出价取 Sorftime 建议值"
+        },
+        {
+          "name": "Leo-B0GY87GJMX-SP-MT-KT-EX-[LongTail]",
+          "tier": "longtail",
+          "match": "exact",
+          "keywords": [
+            { "kw": "griddle pan for induction hob", "bid": 0.50, "vol": 5834 },
+            { "kw": "induction griddle pan", "bid": 0.76, "vol": 972 },
+            { "kw": "griddle pan for gas hob", "bid": 0.50, "vol": 1605 }
+          ],
+          "asins": [],
+          "negative": [],
+          "note": "长尾 3 个（上限 50），先小步验证"
+        }
+      ]
+    }
+  ],
+  "guardrails": [
+    {
+      "trigger": "单个关键词累计花费达 £15 仍无转化",
+      "action": "出价降 10%，两周内无改善则暂停该词"
+    },
+    {
+      "trigger": "单个关键词累计 30 次点击仍 0 单",
+      "action": "直接暂停；回查该词的搜索词报告，判断是词不相关还是页面不转化"
+    },
+    {
+      "trigger": "整体 ACOS 连续 2 周高于可接受区间，或实际 CVR 持续走低",
+      "action": "停止加词；先改主图/价格/评论，CVR 回升后再继续"
+    },
+    {
+      "trigger": "单日预算 18:00 前花完且 ACOS < 50%",
+      "action": "次日预算提 20%，单次不超过 £5，连续观察 3 天"
+    },
+    {
+      "trigger": "某词自然排名进入前 3 页且 ACOS < 50%",
+      "action": "该词出价降 20%，测试自然位承接能力"
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+"use strict";
+
+var D = {};
+try { D = JSON.parse(document.getElementById("ads-data").textContent); } catch(e) { D = {}; }
+
+var CUR = D.currency || "£";
+
+function esc(s){
+  return String(s === undefined || s === null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+function money(v, dec){
+  if (v === undefined || v === null || isNaN(v)) return "—";
+  return CUR + Number(v).toFixed(dec === undefined ? 2 : dec);
+}
+function pct(v, dec){
+  if (v === undefined || v === null || isNaN(v)) return "—";
+  return Number(v).toFixed(dec === undefined ? 1 : dec) + "%";
+}
+function budget(v){ return (v === undefined || v === null) ? "—" : CUR + Number(v); }
+
+/* ---------- 顶部 ---------- */
+
+function renderHeader(){
+  var parts = [];
+  if (D.asin) parts.push(D.asin);
+  if (D.site_cn) parts.push(D.site_cn);
+  if (D.operator) parts.push(D.operator);
+  if (D.date) parts.push(D.date);
+  document.getElementById("sub").textContent = parts.join(" ｜ ");
+}
+
+/* ---------- ① 阶段 ---------- */
+
+function renderPhases(){
+  var list = D.phases || [];
+  document.getElementById("phases").innerHTML = list.map(function(p){
+    return '<div class="phase' + (p.now ? " now" : "") + '">' +
+             '<h3>' + esc(p.name) + '<span>' + esc(p.span) + '</span></h3>' +
+             '<dl>' +
+               '<dt>目标</dt><dd>' + esc(p.goal) + '</dd>' +
+               '<dt>预算</dt><dd>' + esc(p.budget) + '</dd>' +
+               '<dt>重点</dt><dd>' + esc(p.focus) + '</dd>' +
+               '<dt>推进条件</dt><dd>' + esc(p.exit) + '</dd>' +
+             '</dl>' +
+           '</div>';
+  }).join("");
+}
+
+/* ---------- ② 配置表 ---------- */
+
+function cfgRows(){
+  var out = [];
+  (D.campaigns || []).forEach(function(c){
+    var tgt = (c.targeting === "auto") ? "自动" : "手动";
+    (c.adgroups || []).forEach(function(g){
+      var neg = (g.negative || []).join(", ");
+      var base = {
+        portfolio: c.portfolio || "",
+        campaign: c.name || "",
+        group: g.name || "",
+        budget: budget(c.budget),
+        bidding: c.bidding || "",
+        targeting: tgt,
+        neg: neg || "—",
+        stage: c.stage || ""
+      };
+      var kws = g.keywords || [];
+      var asins = g.asins || [];
+      if (kws.length){
+        kws.forEach(function(kw){
+          var b = (typeof kw === "object") ? kw.bid : null;
+          out.push(Object.assign({}, base, {
+            match: g.match || "—",
+            target: (typeof kw === "object") ? kw.kw : String(kw),
+            bid: b
+          }));
+        });
+      } else if (asins.length){
+        asins.forEach(function(a){
+          out.push(Object.assign({}, base, { match: "—", target: a, bid: null }));
+        });
+      } else {
+        out.push(Object.assign({}, base, { match: "—", target: "自动投放", bid: null }));
+      }
+    });
+  });
+  return out;
+}
+
+function renderCfg(){
+  var rows = cfgRows();
+  var html = rows.map(function(r){
+    return "<tr>" +
+      '<td class="mono dup">' + esc(r.portfolio) + "</td>" +
+      '<td class="mono">' + esc(r.campaign) + "</td>" +
+      '<td class="mono">' + esc(r.group) + "</td>" +
+      '<td class="num">' + esc(r.budget) + "</td>" +
+      "<td>" + esc(r.bidding) + "</td>" +
+      "<td>" + esc(r.targeting) + "</td>" +
+      "<td>" + esc(r.match) + "</td>" +
+      '<td class="mono">' + esc(r.target) + "</td>" +
+      '<td class="num">' + (r.bid === null ? "—" : money(r.bid)) + "</td>" +
+      "<td>" + esc(r.neg) + "</td>" +
+      "<td>" + esc(r.stage) + "</td>" +
+    "</tr>";
+  }).join("");
+  document.querySelector("#cfg tbody").innerHTML = html;
+
+  var note = "共 " + rows.length + " 行。出价取 Sorftime 实测建议出价（无实测值写「待补充」）；预算按阶段给并写明依据。配置表可复制 TSV 或导出 CSV。";
+  document.getElementById("cfgNote").innerHTML = esc(note);
+}
+
+/* ---------- ③ 结构 ---------- */
+
+function renderTree(){
+  var camps = D.campaigns || [];
+  var html = "";
+  (D.portfolios || []).forEach(function(p){
+    var own = camps.filter(function(c){ return c.portfolio === p.name; });
+    var gCount = 0, kCount = 0;
+    own.forEach(function(c){
+      (c.adgroups || []).forEach(function(g){
+        gCount++;
+        kCount += (g.keywords || []).length + (g.asins || []).length;
+      });
+    });
+    html += '<div class="node lv0">组合 ' + esc(p.name) +
+            '<span class="meta">' + own.length + ' 个活动 · ' + gCount + ' 个组 · ' + kCount + ' 个投放</span></div>';
+    html += '<div class="branch">';
+    own.forEach(function(c){
+      html += '<div class="node lv1">' +
+                '<span class="nm">' + esc(c.name) + '</span>' +
+                '<span class="meta">' + budget(c.budget) + "/天 · " + esc(c.bidding) +
+                " · " + (c.targeting === "auto" ? "自动" : "手动") + " · " + esc(c.stage) + '</span>' +
+              '</div>';
+      html += '<div class="branch">';
+      (c.adgroups || []).forEach(function(g){
+        var n = (g.keywords || []).length + (g.asins || []).length;
+        var label = n ? (n + " 个" + (g.match ? " " + g.match : "")) : "自动投放";
+        html += '<div class="node lv2">' +
+                  '<span class="nm">' + esc(g.name) + '</span>' +
+                  '<span class="meta">' + label +
+                  ((g.negative || []).length ? " · 否定 " + g.negative.length : "") + '</span>' +
+                '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+  document.getElementById("tree").innerHTML = html || '<div class="node">（无数据）</div>';
+}
+
+/* ---------- ④ 止损 ---------- */
+
+function renderGuard(){
+  var list = D.guardrails || [];
+  document.querySelector("#guard tbody").innerHTML = list.map(function(r){
+    return "<tr><td>" + esc(r.trigger) + "</td><td>" + esc(r.action) + "</td></tr>";
+  }).join("");
+}
+
+/* ---------- 复制 ---------- */
+
+var HEAD = ["组合","活动名","广告组名","日预算","竞价策略","投放定位","匹配方式","关键词/定向","出价","否定词","阶段"];
+
+function buildTSV(){
+  var lines = [HEAD.join("\t")];
+  cfgRows().forEach(function(r){
+    lines.push([
+      r.portfolio, r.campaign, r.group, r.budget, r.bidding, r.targeting,
+      r.match, r.target,
+      (r.bid === null ? "" : Number(r.bid).toFixed(2)),
+      r.neg, r.stage
+    ].join("\t"));
+  });
+  return lines.join("\n");
+}
+
+/* CSV 导出：Excel 打开需 UTF-8 BOM，否则中文乱码 */
+function csvCell(v){
+  var s = (v === undefined || v === null) ? "" : String(v);
+  var Q = String.fromCharCode(34);
+  var needQ = s.indexOf(",") >= 0 || s.indexOf(Q) >= 0 ||
+              s.indexOf(String.fromCharCode(10)) >= 0 ||
+              s.indexOf(String.fromCharCode(13)) >= 0;
+  return needQ ? Q + s.split(Q).join(Q + Q) + Q : s;
+}
+
+function buildCSV(){
+  var bom = String.fromCharCode(0xFEFF);
+  var eol = String.fromCharCode(13, 10);
+  var lines = [HEAD.map(csvCell).join(",")];
+  cfgRows().forEach(function(r){
+    lines.push([
+      r.portfolio, r.campaign, r.group, r.budget, r.bidding, r.targeting,
+      r.match, r.target,
+      (r.bid === null ? "" : Number(r.bid).toFixed(2)),
+      r.neg, r.stage
+    ].map(csvCell).join(","));
+  });
+  return bom + lines.join(eol);
+}
+
+function toast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  setTimeout(function(){ t.classList.remove("on"); }, 1800);
+}
+
+function fallbackCopy(text){
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  var ok = false;
+  try { ok = document.execCommand("copy"); } catch(e) { ok = false; }
+  document.body.removeChild(ta);
+  return ok;
+}
+
+document.getElementById("copyCfg").addEventListener("click", function(){
+  var text = buildTSV();
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){
+      toast("已复制 " + (cfgRows().length) + " 行，可直接粘 Excel");
+    }).catch(function(){
+      toast(fallbackCopy(text) ? "已复制" : "复制失败，请手动选择表格");
+    });
+  } else {
+    toast(fallbackCopy(text) ? "已复制" : "复制失败，请手动选择表格");
+  }
+});
+
+document.getElementById("exportCsv").addEventListener("click", function(){
+  try {
+    var blob = new Blob([buildCSV()], { type: "text/csv;charset=utf-8;" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = (D.asin || "ASIN") + "_" + (D.site || "") + "_广告配置表_" + (D.date || "") + ".csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
+    toast("已导出 CSV（带 BOM，Excel 不乱码）");
+  } catch (e) {
+    toast("导出失败，请改用「复制配置表」");
+  }
+});
+
+document.getElementById("printBtn").addEventListener("click", function(){ window.print(); });
+
+/* ---------- 页脚 ---------- */
+
+function renderFoot(){
+  var camps = (D.campaigns || []).length;
+  var groups = 0, targets = 0, budgetSum = 0;
+  (D.campaigns || []).forEach(function(c){
+    budgetSum += (typeof c.budget === "number" ? c.budget : 0);
+    (c.adgroups || []).forEach(function(g){
+      groups++;
+      targets += (g.keywords || []).length + (g.asins || []).length;
+    });
+  });
+  var hasBudget = false;
+  (D.campaigns || []).forEach(function(c){
+    if (typeof c.budget === "number") { hasBudget = true; }
+  });
+  document.getElementById("foot").innerHTML =
+    "合计 " + camps + " 个活动 · " + groups + " 个广告组 · " + targets + " 个投放 · 日预算 " +
+    (hasBudget ? CUR + budgetSum : "待定") +
+    "　｜　只做 SP　｜　出价来源：Sorftime 实测建议出价；配置表可复制 / 导出 CSV";
+}
+
+/* ---------- 启动 ---------- */
+
+renderHeader();
+renderPhases();
+renderCfg();
+renderTree();
+renderGuard();
+renderFoot();
+
+})();
+</script>
+</body>
+</html>

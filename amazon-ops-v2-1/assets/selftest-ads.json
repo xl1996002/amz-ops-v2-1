@@ -1,0 +1,45 @@
+{
+  "operator": "Leo",
+  "site": "UK",
+  "weeks_since_launch": 20,
+  "portfolios": [{"name": "Leo-A0001"}],
+  "campaigns": [
+    {
+      "name": "Leo-A0001A-SP-AT",
+      "portfolio": "Leo-A0001",
+      "type": "SP",
+      "adgroups": [
+        {"name": "Leo-A0001A-SP-AT-[CloseMatch]", "tier": "longtail", "keywords": ["a", "b"]}
+      ]
+    },
+    {
+      "name": "Leo-A0001A-SP-MT-KT-EX-[LongTail]",
+      "portfolio": "Leo-A0001",
+      "type": "SP",
+      "adgroups": [
+        {"name": "Leo-A0001A-SP-MT-KT-EX-[LongTail]-[Defend]", "tier": "longtail",
+         "keywords": ["folding gymnastics mat", "thick exercise mat home"], "match": "exact"}
+      ]
+    },
+    {
+      "name": "Leo-A0001B-SP-MT-PAT-IP-[CompetitorASIN]",
+      "portfolio": "Leo-A0001",
+      "type": "SP",
+      "identifier_kind": "sku",
+      "adgroups": [
+        {"name": "Leo-A0001B-SP-MT-PAT-IP-[CompetitorASIN]", "tier": "head",
+         "keywords": [], "asins": ["B0GTP1LW7S", "B0H4LLDG5X"]}
+      ]
+    },
+    {
+      "name": "Leo-B0GTP1LW7S-SP-MT-KT-EX-[LongTail]",
+      "portfolio": "Leo-A0001",
+      "type": "SP",
+      "identifier_kind": "asin",
+      "adgroups": [
+        {"name": "Leo-B0GTP1LW7S-SP-MT-KT-EX-[LongTail]-[01]", "tier": "longtail",
+         "keywords": ["folding gymnastics mat"], "match": "exact"}
+      ]
+    }
+  ]
+}
