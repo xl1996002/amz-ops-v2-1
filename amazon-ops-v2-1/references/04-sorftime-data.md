@@ -16,6 +16,9 @@
 | 6 | `keyword_detail` | `keyword`, `keyword_support_site` | 月搜索、ABA 周排名、建议 CPC、旺季月份 | 单词价值 |
 | 7 | `keyword_search_results` | `keyword`, `keyword_support_site`, `page`, `position_type` | 自然位/广告位的商品列表（价格、品牌、评分、月销、份额） | 竞品结构 |
 | 8 | `product_variations` | `asin`, `amz_site` | 子体：价格、属性、库存、销量 | 变体价区间 |
+| 9 | `keyword_trend` | `keyword`, `type=2`(月), `keyword_support_site` | `search_volume_trend` 扁平数组 [yyyyMM, 月搜索量, ...]，最长数年 | 旺季与季节性系数 |
+
+> **`keyword_trend` 的 MCP 坑**：参数 `type` 语义与 API 相反——MCP 里 `2`=月度、`1`=周度（工具会自动映射）；月度用 `type=2`。返回是**扁平字符串数组**，偶数位=yyyyMM、奇数位=该月搜索量，必须两两配对解析，最后一个月若未结束要剔除。
 
 **参数坑**：
 - `amz_site` 与 `keyword_support_site` 是两个不同参数名，别混用；英国站是 **`GB`**，不是 `UK`。
@@ -79,6 +82,34 @@ print('上架周数:', round((t-d).days/7, 1))"
 真实事故：把「KAYMAN £69.99」当成无垫款最高价，实际是 `With Mat, Teal` 子体；EVERYMILE £82.90 是 `Pink-Mat-N` 子体。两者都是**含垫价**，导致定价带上沿判断错了 30 英镑。
 
 → 判定含垫/不含垫、单件/套装、主体/配件，**必须看 `product_variations` 的属性名**，不能只看标题关键词。标题里没有 `with mat` 不代表该父体不带垫子体。
+
+---
+
+## 二·补、旺季与季节性系数（数据诊断第四节必做，2026-11-27 用户定规）
+
+数据快照与诊断的「四、旺季与季节性」**不能只写一句「旺季在 X 月」**，必须给出归一化后的**季节性系数表**。
+
+**算法**（用户口径：最高月 = 1，其余按比例 0.1 / 0.2 / 0.3…）：
+
+1. 数据来源：`keyword_trend(keyword=主词, type=2, keyword_support_site=站点)` 的 `search_volume_trend`。
+2. 取**最近 12 个完整月**（当前未结束的当月剔除）；每个词独立算。
+3. 窗口内找月搜索量最大值 `peak`。
+4. 每月系数 = `该月搜索量 / peak`，**四舍五入保留 1 位小数**（0.0–1.0）。peak 月 = 1.0。
+5. 接近峰值的月份并列显示 1.0 属正常（如 68,056 与 68,013 都取 1.0），峰值绝对值以 `peak` 字段为准。
+
+**输出格式**：一张「月份 × 主词」的系数表 + 每词一句峰值/谷值说明 + 数据区间与来源。
+
+```bash
+# 把 keyword_trend 原始返回汇总成 {"keywords":[{keyword, search_volume_trend}, ...]} 后：
+python3 scripts/seasonality_index.py --input kw_trends.json --months 12 \
+  --output 季节性系数.md --json-report 季节性系数.json
+```
+
+**红线**：
+- 系数**只用于淡旺季判断与备货/推广排期**，**绝不写进 Listing 文案**（不可变成时效承诺或销量承诺）。
+- 主词至少取 3–5 个（核心词 + 场景词各占），单词的系数不能代表整个类目。
+- 数据不可得时写「`keyword_trend` 未返回月度数据，季节性系数无法计算」，**不得用类目预测涨幅反推系数**凑数。
+- 类目 `category_report` 的 `sales_volume_change_rate_forecast` 是另一口径（销量预测涨跌幅），可与系数表并列陈述，但**不能混算成一个系数**。
 
 ---
 
